@@ -4,7 +4,10 @@
 
 把要輸入的內容一口氣輸進程式再看結果<p>
 <p>
-  
+
+## 介面
+![image](https://github.com/shane-liu-1010/code_tester/blob/master/example.png)
+
 ## 支援語言
 
 C++（要先準備好g++）<p>
