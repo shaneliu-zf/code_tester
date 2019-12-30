@@ -4,6 +4,7 @@ import tkinter as tk
 import tkinter.ttk as tt
 import tkinter.messagebox
 import os
+import platform
 
 def cpp(x):
     f=open('a.cpp', 'w')
@@ -17,7 +18,10 @@ def cpp(x):
     else :
         os.system("g++ a.cpp -o a.out")
     if os.path.isfile("a.out"):
-        os.system("./a.out < in.txt > out.txt")
+        if platform.system() == 'Windows':
+            os.system("a.out < in.txt > out.txt")
+        else :
+            os.system("./a.out < in.txt > out.txt")
         f=open('out.txt', 'r')
         s=f.read()
         f.close()
