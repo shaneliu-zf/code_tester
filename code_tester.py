@@ -57,7 +57,7 @@ def py(x):
 def go():
     output.delete(1.0, "end")
     if(left_combo.get()=="C++17" or left_combo.get()=="C++"):
-        cpp17(left_combo.get())
+        cpp(left_combo.get())
     elif(left_combo.get()=="Python3" or left_combo.get()=="Python2"):
         py(left_combo.get())
     else :
