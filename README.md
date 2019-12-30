@@ -6,7 +6,7 @@
 <p>
 
 ## 介面
-
+![image](https://github.com/shane-liu-1010/code_tester/blob/master/example_photo.png)
 ## 支援語言
 
 C++（要先準備好g++）<p>
