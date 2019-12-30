@@ -5,14 +5,17 @@ import tkinter.ttk as tt
 import tkinter.messagebox
 import os
 
-def cpp17():
+def cpp(x):
     f=open('a.cpp', 'w')
     f.write(left_text.get('1.0', 'end'))
     f.close()
     f=open('in.txt', 'w')
     f.write(input.get('1.0', 'end'))
     f.close()
-    os.system("g++ -std=c++17 a.cpp -o a.out")
+    if(x=="C++17"):
+        os.system("g++ -std=c++17 a.cpp -o a.out")
+    else :
+        os.system("g++ a.cpp -o a.out")
     if os.path.isfile("a.out"):
         os.system("./a.out < in.txt > out.txt")
         f=open('out.txt', 'r')
@@ -27,53 +30,17 @@ def cpp17():
     else :
         tk.messagebox.showinfo(message="編譯錯誤")
 
-def cpp():
-    f=open('a.cpp', 'w')
-    f.write(left_text.get('1.0', 'end'))
-    f.close()
-    f=open('in.txt', 'w')
-    f.write(input.get('1.0', 'end'))
-    f.close()
-    os.system("g++ a.cpp -o a.out")
-    if os.path.isfile("a.out"):
-        os.system("./a.out < in.txt > out.txt")
-        f=open('out.txt', 'r')
-        s=f.read()
-        f.close()
-        if s=="":
-            tk.messagebox.showinfo(message="無輸出")
-        output.insert(1.0,s)
-        os.remove("a.out")
-        os.remove("in.txt")
-        os.remove("out.txt")
-    else :
-        tk.messagebox.showinfo(message="編譯錯誤")
-
-def py2():
+def py(x):
     f=open('a.py', 'w')
     f.write(left_text.get('1.0', 'end'))
     f.close()
     f=open('in.txt', 'w')
     f.write(input.get('1.0', 'end'))
     f.close()
-    os.system("python2 a.py < in.txt > out.txt")
-    f = open('out.txt', 'r')
-    s=f.read()
-    f.close()
-    if s=="":
-        tk.messagebox.showinfo(message="無輸出(可能是編譯錯誤)")
-    output.insert(1.0,s)
-    os.remove("in.txt")
-    os.remove("out.txt")
-
-def py3():
-    f=open('a.py', 'w')
-    f.write(left_text.get('1.0', 'end'))
-    f.close()
-    f=open('in.txt', 'w')
-    f.write(input.get('1.0', 'end'))
-    f.close()
-    os.system("python3 a.py < in.txt > out.txt")
+    if(x=="Python3"):
+        os.system("python3 a.py < in.txt > out.txt")
+    else:
+        os.system("python2 a.py < in.txt > out.txt")
     f = open('out.txt', 'r')
     s=f.read()
     f.close()
@@ -85,14 +52,10 @@ def py3():
 
 def go():
     output.delete(1.0, "end")
-    if(left_combo.get()=="C++17"):
-        cpp17()
-    elif(left_combo.get()=="C++"):
-        cpp()
-    elif(left_combo.get()=="Python3"):
-        py3()
-    elif(left_combo.get()=="Python2"):
-        py2()
+    if(left_combo.get()=="C++17" or left_combo.get()=="C++"):
+        cpp17(left_combo.get())
+    elif(left_combo.get()=="Python3" or left_combo.get()=="Python2"):
+        py(left_combo.get())
     else :
         tk.messagebox.showinfo(message="尚未有該程式語言")
 
