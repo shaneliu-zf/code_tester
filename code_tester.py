@@ -14,10 +14,13 @@ def cpp(x):
     f.write(input.get('1.0', 'end'))
     f.close()
     if(x=="C++17"):
-        os.system("g++ -std=c++17 a.cpp -o a.out")
+        os.system("g++ -std=c++17 a.cpp -o a.out &>out.txt")
     else :
-        os.system("g++ a.cpp -o a.out")
-    if os.path.isfile("a.out"):
+        os.system("g++ a.cpp -o a.out &>out.txt")
+    f=open('out.txt', 'r')
+    s=f.read()
+    if s=="":
+        f.close()
         if platform.system() == 'Windows':
             os.system("a.out < in.txt > out.txt")
         else :
@@ -32,7 +35,7 @@ def cpp(x):
         os.remove("in.txt")
         os.remove("out.txt")
     else :
-        tk.messagebox.showinfo(message="編譯錯誤")
+        tk.messagebox.showinfo(message="編譯錯誤："+s)
 
 def py(x):
     f=open('a.py', 'w')
@@ -42,16 +45,24 @@ def py(x):
     f.write(input.get('1.0', 'end'))
     f.close()
     if(x=="Python3"):
-        os.system("python3 a.py < in.txt > out.txt")
+        os.system("python3 a.py < in.txt &> cp.txt > out.txt")
     else:
-        os.system("python2 a.py < in.txt > out.txt")
-    f = open('out.txt', 'r')
+        os.system("python2 a.py < in.txt &> cp.txt > out.txt")
+    f = open('cp.txt', 'r')
     s=f.read()
     f.close()
     if s=="":
-        tk.messagebox.showinfo(message="無輸出(可能是編譯錯誤)")
-    output.insert(1.0,s)
+        f = open('out.txt', 'r')
+        s=f.read()
+        f.close()
+        if s=="":
+            tk.messagebox.showinfo(message="無輸出")
+        else :
+            output.insert(1.0,s)
+    else :
+        tk.messagebox.showinfo(message="編譯錯誤："+s)
     os.remove("in.txt")
+    os.remove("cp.txt")
     os.remove("out.txt")
 
 def go():
@@ -93,7 +104,7 @@ in_lebel.pack(side=tk.LEFT)
 input = tk.Text(input_frame,width=50,height=18,bg='aliceblue')
 input.pack(side=tk.LEFT)
 
-bottom_button = tk.Button(right_frame, text='GO!',font=("Concole",20),command=go,width=10)
+bottom_button = tk.Button(right_frame, text='GO!',font=("Concolas",20),command=go,width=10)
 bottom_button.pack(pady=20)
 
 output_frame = tk.Frame(right_frame)
