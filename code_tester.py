@@ -23,19 +23,20 @@ def cpp(x):
         f.close()
         if platform.system() == 'Windows':
             os.system("a.out < in.txt > out.txt")
-        else :
+        else:
             os.system("./a.out < in.txt > out.txt")
         f=open('out.txt', 'r')
         s=f.read()
         f.close()
         if s=="":
             tk.messagebox.showinfo(message="無輸出")
-        output.insert(1.0,s)
+        else:
+            output.insert(1.0,s)
         os.remove("a.out")
         os.remove("in.txt")
         os.remove("out.txt")
     else :
-        tk.messagebox.showinfo(message="編譯錯誤："+s)
+        tk.messagebox.showinfo(title="編譯錯誤",message=s)
 
 def py(x):
     f=open('a.py', 'w')
@@ -60,7 +61,7 @@ def py(x):
         else :
             output.insert(1.0,s)
     else :
-        tk.messagebox.showinfo(message="編譯錯誤："+s)
+        tk.messagebox.showinfo(title="編譯錯誤",message=s)
     os.remove("in.txt")
     os.remove("cp.txt")
     os.remove("out.txt")
